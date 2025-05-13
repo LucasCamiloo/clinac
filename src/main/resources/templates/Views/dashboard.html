@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CLINAC+</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            width: 100%;
+            height: 85px;
+            background-color: #003699;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: inset 0px -7px #1396E0;
+            padding: 0 20px;
+            box-sizing: border-box;
+            color: white;
+        }
+        
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .welcome-card {
+            background-color: #E6EBF5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #003699;
+        }
+        
+        footer {
+            width: 100%;
+            height: 115px;
+            background-color: #003699;
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            bottom: 0;
+        }
+        
+        .logout-btn {
+            background-color: #C0392B;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>CLINAC+</h1>
+        <div class="nav-links">
+            <a href="#">Início</a>
+            <a href="#">Consultas</a>
+            <a href="#">Perfil</a>
+            <a th:href="@{/logout}">Sair</a>
+        </div>
+    </header>
+    
+    <main>
+        <div class="welcome-card">
+            <h2 th:text="'Bem-vindo, ' + ${session.usuarioLogado.nome} + '!'">Bem-vindo!</h2>
+            <p th:text="'Tipo de usuário: ' + ${session.tipoUsuario}">Tipo de usuário: desconhecido</p>
+            <p>Você está logado com sucesso no sistema CLINAC+.</p>
+            <a th:href="@{/logout}" class="logout-btn">Sair</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p><strong>CLINAC+ | 2025</strong><br>
+            Os serviços anunciados neste site são apenas um portfólio fictício.<br>
+            O Clinac+ é apenas um projeto universitário desenvolvido por alunos como forma de avaliação!</p>
+    </footer>
+</body>
+
+</html>

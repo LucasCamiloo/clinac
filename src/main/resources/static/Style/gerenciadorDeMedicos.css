@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap");
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: url('/Includes/Fundo-Gerenciador-Medicos.png') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    height: 85px;
+    width: 100%;
+    background-color: #003699;
+    box-shadow: inset 0px -7px #1396e0;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1000px;
+    background-color: #d7ebf3;
+    border: 2px solid #003699;
+    border-radius: 15px;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #0b6599;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .botoes button {
+    padding: 10px 20px;
+    border: 1px solid black ;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .botoes .cadastrar {
+    background-color: #9DD8C5;
+  }
+
+  .botoes .editar {
+    background-color: #003699;
+  }
+
+  .botoes .excluir {
+    background-color: #C0392B;
+  }
+
+  .tabela-container {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 2px solid #003699;
+    border-radius: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+  }
+
+  thead th {
+    position: sticky;
+    top: 0;
+    background-color: #b6e3db;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #999;
+    z-index: 1;
+  }
+
+  tbody td {
+    padding: 10px;
+    background-color: #f0f4fa;
+    border-bottom: 1px solid #ccc;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  td input[type="radio"] {
+    transform: scale(1.2);
+  }
+
+  footer {
+    height: 115px;
+    background-color: #003699;
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+  }
+
+  footer strong {
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .botoes {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    table {
+      font-size: 14px;
+    }
+  }

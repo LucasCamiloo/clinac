@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CADASTRO DE PACIENTES</title>
+    <style type="text/css">
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        
+        header {
+            width: 100%;
+            height: 85px;
+            background-color: #003699;
+            display: flex;
+            box-shadow: inset 0px -7px #1396E0;
+        }
+
+        main{
+            height: 880px;
+            width: 100%;
+            font-family:"Poppins";
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        html, body{
+            background: url('/cadastroPaciente/Includes/fundo.png');
+            width: 100%;
+            height: 1080px;
+            padding: 0px;
+            margin: 0px;
+        }
+        h1#titulo{
+            color: #0B6599;
+            text-align: center;
+            font-family: 'Poppins';
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 40px; /* 83.333% */
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #formulario{
+            width: 902px;
+            height: 772px;
+            flex-shrink: 0;
+            border-radius: 25px;
+            border: 2px solid #003699;
+            background: #E6EBF5;
+        }
+        
+        label{
+            font-family: 'Poppins';
+            color: black;
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        input, select{
+            width: 375px;
+            height: 60px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            border: 1px solid #000;
+            background: #E6EBF5;
+            font-family: 'Poppins';
+            color: #000;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            padding-left: 15px;
+        }
+
+        #cidade{
+            width: 287px;
+            height: 60px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            border: 1px solid #000;
+            background: #E6EBF5;
+            padding-left: 15px;
+        }
+
+        #estado{
+            width: 180px;
+            height: 60px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            border: 1px solid #000;
+            background: #E6EBF5;
+        }
+
+        div#bloco{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            height: 100px;   
+            width: 100%;
+        }
+
+        div#last{
+            padding-left: 50px;
+        }
+        
+        form div#bloco:nth-child(4){
+            display: flex;
+            justify-content: flex-start;
+            padding-left: 45px;
+            gap: 125px;
+        }
+        #sexo{
+            width: 375px;
+            height: 60px;
+        }
+
+        div#botao{
+            display: flex;
+            justify-content: flex-end;
+            gap: 40px;
+            padding-right:38px;
+            padding-top: 25px;
+        }
+
+        button{
+            width: 287px;
+            height: 60px;
+            flex-shrink: 0;
+            color: #FFF;
+            text-align: center;
+            font-family: 'Poppins';
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+
+        }
+        
+        #reset{
+            border-radius: 10px;
+            border: 1px solid #000;
+            background: #C0392B;
+        }
+
+        #cadastrar{
+            border-radius: 10px;
+            border: 1px solid #000;
+            background: #003699;
+        }
+
+        footer{
+            width: 100%;
+            height: 115px;
+            background-color: #003699;
+            font-family: "Poppins", sans-serif;
+            font-size: 0.9375em;
+            font-weight: 300;
+            font-style: normal;
+            color: aliceblue;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+<body>
+    <header></header>
+    <main>
+        <div id="formulario">
+            <h1 id="titulo">Cadastro de pacientes</h1>
+            <form action="/pacientes" method="post">
+                <div id="bloco">
+                    <div>
+                        <label>Nome completo
+                            <input type="text" name="nome" placeholder="Dartanã Almeida" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label>Data de Nascimento
+                            <input data="data" type="date" required>
+                        </label>
+                    </div>
+                </div>
+                <div id="bloco">
+                    <div>
+                        <label>Telefone
+                            <input type="tel" name="telefone" placeholder="(11)1234-5678">
+                        </label>
+                    </div>
+                    <div>
+                        <label>E-mail
+                            <input type="email" name="email" placeholder="exemplo@hotmail.com">
+                        </label>
+                    </div>
+                </div>
+                <div id="bloco">
+                    <div id="sexo">
+                        <label>Sexo
+                            <select name="sexo" required>
+                                <option value="masculino">Masculino</option>
+                                <option selected value="feminino">Feminino</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label>CPF
+                            <input type="text" name="cpf" placeholder="xxx.xxx.xxx-xx" required>
+                        </label>
+                    </div>
+                </div>
+                <div id="bloco">
+                    <div>
+                        <label>Cidade
+                                <input type="text" name="cidade" placeholder="São Paulo" required/>
+                        </label>
+                    </div>
+                    <div>
+                        <label>Estado
+                            <select id="estado">
+                                <option value="saoPaulo">SP</option>
+                                <option value="rioDeJaneiro">RJ</option>
+                                <option value="minasGerais">MG</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="bloco" id="last">
+                    <div>
+                        <label>Senha
+                            <input type="password" name="senha">
+                        </label>
+                    </div>
+                </div>
+                <div id="botao">
+                    <button id="reset" type="reset">Cancelar</button>
+                    <button id="cadastrar" type="submit">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p><Strong>CLINAC+ | 2025</Strong><br>
+            Os serviços anunciados neste site são apenas um portfólio fictício.<br> 
+            O Clinac+ é apenas um projeto universitário desenvolvido por alunos como forma de avaliação! As fotos contidas nesta página são meramente ilustrativas.
+        </p>
+    </footer>
+</body>
+</html>

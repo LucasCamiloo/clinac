@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Style/paginaInicial.css">
+    <title>Página inicial</title>
+</head>
+
+<body>
+    <header>
+        <p> <img src="/Includes/Principal_Horario.svg" alt="Hórario">&nbsp<strong>HORÁRIO DE
+                FUNCIONAMENTO:&nbsp</strong> 09:00 - 17:00</p>
+        <p> <img src="/Includes/mini-mapa_Principal.svg" alt="Hórario">&nbsp <strong>Avenida</strong>&nbspSanto Amaro -
+            1966</p>
+    </header>
+    <main>
+        <section id="banner-botton">
+            <div>
+                <a th:href="@{/login}" class="botao-login">
+                    <img src="/Includes/Principal_usuario.svg" alt="Botão de usuário">
+                    <span>Área de login</span>
+                </a>
+            </div>
+            <div class="imagem"></div>
+        </section>
+        <section id="programas">
+            <div class="quadrado">
+                <div class="imagem">
+                    <img src="/Includes/Principal_doctor .svg" alt="" width="105px" height="105px">
+                </div>
+                <div class="texto">
+                    <p>EXAMES MÉDICOS</p>
+                    <p>PRESENCIAL OU REMOTO</p>
+                    <button>AGENDAR</button>
+                </div>
+            </div>
+            <div class="quadrado">
+                <div class="imagem">
+                    <img src="/Includes/Principal_vaccine.svg" alt="" width="105px" height="105px">
+                </div>
+                <div class="texto">
+                    <p>VACINAS JUNTO</p>
+                    <p>AO MINISTÉRIO DA SAÚDE</p>
+                    <button>SAIBA MAIS</button>
+                </div>
+            </div>
+            <div class="quadrado">
+                <div class="imagem">
+                    <img src="/Includes/Principal_contract.svg" alt="" width="105px" height="105px">
+                </div>
+                <div class="texto">
+                    <p>PRESCRIÇÕES</p>
+                    <p>AQUI CUIDAMOS DE VOCÊ</p>
+                    <button>CONSULTE</button>
+                </div>
+            </div>
+            <div class="quadrado">
+                <div class="imagem">
+                    <img src="/Includes/Principal_robotic-surgery.svg" alt="" width="105px" height="105px">
+                </div>
+                <div class="texto">
+                    <p>CIRURGIÕES</p>
+                    <p>PRONTOS PARA TE ATENDER</p>
+                    <button>AGENDAR</button>
+                </div>
+            </div>
+        </section>
+        <section id="banner_convenio">
+            <div id="banner_aceitos">
+                <div id="aceito_texto">
+                    <p>Conheça os <strong>convênios parceiros</strong></p>
+                    <p>Parceria com as principais<br> operadores de convênios do Brasil </p>
+                </div>
+                <div id="aceito_imagem">
+                    <div>
+                        <div class="conveniados" id="prime">
+                            <img src="/Includes/Principal_logoMed.svg" alt="" width="62px" height="62px">
+                            <p><u>MedPrime</u></p>
+                        </div>
+                        <div class="conveniados" id="visa">
+                            <img src="/Includes/Principal-logoVisa.svg" alt="" width="62px" height="62px">
+                            <p><u><s>Visa</s>Vida</u></p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="conveniados" id="bank">
+                            <img src="/Includes/Principal-logoBank.svg" alt="" width="62px" height="62px">
+                            <p><u>BankHealth</u></p>
+                        </div>
+                        <div class="conveniados" id="santa">
+                            <img src="/Includes/Prinpal_Santa.svg" alt="" width="62px" height="62px">
+                            <p><u>SantaCasa</u></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="quem_somos">
+            <p>Quem nós somos</p>
+            <div id="area">
+                <div class="quadrado_somos">
+                    <div><img src="/Includes/Principal_doctor.svg" alt=""></div>
+                    <div>Nossa equipe dedicada oferece atendimento humanizado e de qualidade, unindo tecnologia e
+                        cuidado para promover sua saúde e bem-estar em cada consulta.</div>
+                </div>
+                <div class="quadrado_somos">
+                    <div><img src="/Includes/Principal_patient 1.svg" alt=""></div>
+                    <div>Cada paciente recebe cuidado personalizado e atendimento de excelência. Priorizamos sua saúde e
+                        bem-estar com dedicação, tecnologia e um ambiente acolhedor.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p><strong>CLINAC+ | 2025</strong><br>
+            Os serviços anunciados neste site são apenas um portfólio fictício.<br>
+            O Clinac+ é apenas um projeto universitário desenvolvido por alunos como forma de avaliação! As fotos
+            contidas nesta página são meramente ilustrativas.</p>
+    </footer>
+</body>
+
+</html>
