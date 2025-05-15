@@ -75,8 +75,21 @@ public class AuthController {
                     session.setAttribute("tipoUsuario", "medico");
                     model.addAttribute("tipoUsuario", "medico");
                     model.addAttribute("usuarioLogado", medicoOpt.get());
-                    // Redirecione para o menu do médico se desejar
-                    return "Views/dashboard";
+                    // Buscar consultas do médico e incluir nome do paciente
+                    if (consultaRepository != null) {
+                        var consultas = consultaRepository.findByProfissional(medicoOpt.get().getNome());
+                        // Adiciona o nome do paciente em cada consulta
+                        if (consultas != null && pacienteRepository != null) {
+                            consultas.forEach(consulta -> {
+                                if (consulta.getIdPaciente() != null) {
+                                    pacienteRepository.findById(consulta.getIdPaciente())
+                                        .ifPresent(p -> consulta.setNomePaciente(p.getNome()));
+                                }
+                            });
+                        }
+                        model.addAttribute("consultas", consultas);
+                    }
+                    return "Views/MainMenuMedico/index";
                 }
             } catch (NumberFormatException ignored) {}
         }
@@ -134,5 +147,27 @@ public class AuthController {
         }
         // Adicione aqui a lógica para carregar consultas se necessário
         return "Views/MainMenuPaciente/index";
+    }
+
+    @GetMapping("/Views/MainMenuMedico/index")
+    public String mainMenuMedico(HttpSession session, Model model) {
+        if (session.getAttribute("usuarioLogado") == null || !"medico".equals(session.getAttribute("tipoUsuario"))) {
+            return "redirect:/login";
+        }
+        Medico medico = (Medico) session.getAttribute("usuarioLogado");
+        if (medico != null && consultaRepository != null) {
+            var consultas = consultaRepository.findByProfissional(medico.getNome());
+            if (consultas != null && pacienteRepository != null) {
+                consultas.forEach(consulta -> {
+                    if (consulta.getIdPaciente() != null) {
+                        pacienteRepository.findById(consulta.getIdPaciente())
+                            .ifPresent(p -> consulta.setNomePaciente(p.getNome()));
+                    }
+                });
+            }
+            model.addAttribute("consultas", consultas);
+        }
+        model.addAttribute("usuarioLogado", medico);
+        return "Views/MainMenuMedico/index";
     }
 }

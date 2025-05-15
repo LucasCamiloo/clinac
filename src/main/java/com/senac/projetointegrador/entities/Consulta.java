@@ -16,13 +16,14 @@ public class Consulta {
     private String status;
     private String idMedico;
     private String idPaciente;
+    private String nomePaciente; 
 
     // Construtor vazio necessário para MongoDB
     public Consulta() {
     }
 
     public Consulta(String id, String tipoDeServico, String profissional, Date dataConsulta, String preConsulta,
-            String status, String idMedico, String idPaciente) {
+            String status, String idMedico, String idPaciente, String nomePaciente) {
         this.id = id;
         this.tipoDeServico = tipoDeServico;
         this.profissional = profissional;
@@ -31,6 +32,7 @@ public class Consulta {
         this.status = status;
         this.idMedico = idMedico;
         this.idPaciente = idPaciente;
+        this.nomePaciente = nomePaciente;
     }
 
     public String getId() {
@@ -95,5 +97,13 @@ public class Consulta {
 
     public void setIdPaciente(String idPaciente) {
         this.idPaciente = idPaciente;
+    }
+
+    public String getNomePaciente() {
+        return nomePaciente;
+    }
+
+    public void setNomePaciente(String nomePaciente) {
+        this.nomePaciente = nomePaciente;
     }
 }

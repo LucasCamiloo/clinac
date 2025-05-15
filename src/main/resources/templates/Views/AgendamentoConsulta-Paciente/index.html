@@ -111,22 +111,21 @@
         </label>
       </div>
       <label style="font-weight:600;">Profissional
-        <select name="profissional" id="profissional" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;" onchange="atualizarTipoServico()">
+        <select name="profissional" id="profissional" required style="width:100%;min-width:220px;max-width:100%;height:48px;border-radius:8px;border:1px solid #003699;" onchange="atualizarTipoServico()">
           <option value="" disabled selected>Selecione o médico</option>
           <option th:each="medico : ${medicos}" th:value="${medico.nome}" th:data-especialidade="${medico.especialidade}" th:text="${medico.nome}"></option>
         </select>
       </label>
       <label style="font-weight:600;">Tipo de serviço
-        <select name="tipo-servico" id="tipo-servico" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;">
+        <select name="tipo-servico" id="tipo-servico" required style="width:100%;min-width:220px;max-width:100%;height:48px;border-radius:8px;border:1px solid #003699;">
           <option value="" disabled selected>Selecione o serviço</option>
-          <!-- As opções serão preenchidas via JS conforme especialidade do médico -->
         </select>
       </label>
       <label style="font-weight:600;">Data da consulta
-        <input type="date" name="data" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;padding-left:10px;">
+        <input type="date" name="data" required style="width:100%;min-width:220px;max-width:100%;height:48px;border-radius:8px;border:1px solid #003699;padding-left:10px;">
       </label>
       <label style="font-weight:600;">Horário
-        <select name="horario" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;">
+        <select name="horario" required style="width:100%;min-width:220px;max-width:100%;height:48px;border-radius:8px;border:1px solid #003699;">
           <option>10:30</option>
           <option>11:00</option>
           <option>14:00</option>
@@ -136,26 +135,13 @@
         <textarea name="pre-consulta" style="width:100%;border-radius:8px;border:1px solid #003699;min-height:100px;">Apresento recorrentes dores de cabeça, andam me incomodando bastante</textarea>
       </label>
       <div style="display:flex; justify-content:flex-end; gap:15px; margin-top:10px;">
-        <button type="reset" style="background:#C0392B; color:white; border:none; border-radius:8px; padding:10px 25px; font-size:16px;">Cancelar</button>
+        <button type="button" onclick="voltarTelaAnterior()" style="background:#C0392B; color:white; border:none; border-radius:8px; padding:10px 25px; font-size:16px;">Cancelar</button>
         <button type="submit" style="background:#003699; color:white; border:none; border-radius:8px; padding:10px 25px; font-size:16px;">Cadastrar</button>
       </div>
       <div th:if="${success}" style="color:green;text-align:center;margin-top:10px;" th:text="${success}"></div>
       <div th:if="${error}" style="color:red;text-align:center;margin-top:10px;" th:text="${error}"></div>
     </form>
     <script>
-      // Mapeamento das especialidades para os tipos de serviço
-      const especialidades = [
-        "Cardiologista",
-        "Clínico Geral",
-        "Dermatologista",
-        "Ortopedista",
-        "Pediatra",
-        "Ginecologista",
-        "Oftalmologista",
-        "Psiquiatra",
-        "Neurologista",
-        "Endocrinologista"
-      ];
       function atualizarTipoServico() {
         const selectProf = document.getElementById('profissional');
         const selectTipo = document.getElementById('tipo-servico');
@@ -163,12 +149,14 @@
         const selected = selectProf.options[selectProf.selectedIndex];
         if (selected && selected.dataset && selected.dataset.especialidade) {
           const esp = selected.dataset.especialidade;
-          // Só adiciona a especialidade do médico como opção
           const opt = document.createElement('option');
           opt.value = esp;
           opt.text = esp;
           selectTipo.appendChild(opt);
         }
+      }
+      function voltarTelaAnterior() {
+        window.history.back();
       }
     </script>
   </div>

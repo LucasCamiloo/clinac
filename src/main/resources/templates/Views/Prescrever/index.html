@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prescrição Médica</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003399;
+      height: 60px;
+    }
+    .container {
+      background-color: rgba(240, 248, 255, 0.95);
+      max-width: 1000px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 50px 40px;
+      border: 2px solid #003399;
+      border-radius: 15px;
+    }
+    h1 {
+      text-align: center;
+      color: #1a355e;
+      margin-bottom: 40px;
+    }
+    .form-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 25px;
+    }
+    .form-group div {
+      flex: 1 1 48%;
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    select, input[type="text"], input[type="date"], textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: right;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+    }
+    .btn-cancelar {
+      background-color: #d0342c;
+      color: white;
+    }
+    .btn-prescrever {
+      background-color: #003399;
+      color: white;
+    }
+    footer {
+      background-color: #003399;
+      color: white;
+      text-align: center;
+      font-size: 12px;
+      padding: 20px 10px;
+      margin-top: auto;
+    }
+    @media (max-width: 600px) {
+      .form-group div {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header></header>
+  <div class="container">
+    <h1 style="color: #0B6599;">Prescrição Médica</h1>
+    <form th:action="@{/prescrever}" method="post">
+      <input type="hidden" name="consultaId" th:value="${consulta.id}" />
+      <input type="hidden" name="pacienteId" th:value="${pacienteId}" />
+      <div class="form-group">
+        <div>
+          <label for="id-paciente">ID do Paciente</label>
+          <input type="text" id="id-paciente" th:value="${pacienteId}" readonly>
+        </div>
+        <div>
+          <label for="dose-de-uso">Dose de Uso</label>
+          <select id="dose-de-uso" name="doseDeUso" required>
+            <option>8 Hrs</option>
+            <option>12 Hrs</option>
+            <option>Diária</option>
+          </select>
+        </div>
+        <div>
+          <label for="remedio">Remédio</label>
+          <input type="text" id="remedio" name="remedio" required>
+        </div>
+        <div>
+          <label for="remedioAlternativo">Remédio alternativo</label>
+          <input type="text" id="remedioAlternativo" name="remedioAlternativo">
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          <label for="dataInicio">Data de início</label>
+          <input type="date" id="dataInicio" name="dataInicio" required>
+        </div>
+        <div>
+          <label for="dataFim">Data de término</label>
+          <input type="date" id="dataFim" name="dataFim" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div style="flex: 1 1 100%;">
+          <label for="observacao">Observação</label>
+          <textarea id="observacao" name="observacao"></textarea>
+        </div>
+      </div>
+      <div class="buttons">
+        <button type="reset" class="btn btn-cancelar">Cancelar</button>
+        <button type="submit" class="btn btn-prescrever">Prescrever</button>
+        <a th:href="@{/Views/MainMenuMedico/index}" class="btn" style="background:#888; color:white; text-decoration:none;">Voltar</a>
+      </div>
+    </form>
+  </div>
+  <footer>
+    CLINAC+ | 2025<br>
+    Os serviços anunciados neste site são apenas um portfólio fictício.<br>
+    O Clinac+ é apenas um projeto universitário desenvolvido por alunos como forma de avaliação! As fotos contidas nesta página são meramente ilustrativas.
+  </footer>
+</body>
+</html>

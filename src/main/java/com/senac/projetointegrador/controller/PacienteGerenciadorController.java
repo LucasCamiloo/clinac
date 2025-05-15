@@ -2,6 +2,7 @@ package com.senac.projetointegrador.controller;
 
 import com.senac.projetointegrador.entities.Paciente;
 import com.senac.projetointegrador.repositorys.PacienteRepository;
+import com.senac.projetointegrador.repositorys.PrescricaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,15 @@ public class PacienteGerenciadorController {
     @Autowired(required = false)
     private PacienteRepository pacienteRepository;
 
+    @Autowired(required = false)
+    private PrescricaoRepository prescricaoRepository;
+
     @GetMapping("/consultar-pacientes")
     public String listarPacientes(HttpSession session, Model model) {
-        if (session.getAttribute("usuarioLogado") == null || !"recepcionista".equals(session.getAttribute("tipoUsuario"))) {
+        Object usuario = session.getAttribute("usuarioLogado");
+        String tipoUsuario = (String) session.getAttribute("tipoUsuario");
+        // Permite acesso para recepcionista OU médico
+        if (usuario == null || (!"recepcionista".equals(tipoUsuario) && !"medico".equals(tipoUsuario))) {
             return "redirect:/login";
         }
         if (pacienteRepository != null) {
@@ -101,5 +108,16 @@ public class PacienteGerenciadorController {
             pacienteRepository.deleteById(id);
         }
         return "redirect:/consultar-pacientes";
+    }
+
+    @GetMapping("/pacientes/relatorio-prescricoes")
+    public String relatorioPrescricoes(@RequestParam String pacienteId, HttpSession session, Model model) {
+        if (session.getAttribute("usuarioLogado") == null) {
+            return "redirect:/login";
+        }
+        if (prescricaoRepository != null) {
+            model.addAttribute("prescricoes", prescricaoRepository.findByPacienteId(pacienteId));
+        }
+        return "Views/Prescrever/relatorio";
     }
 }

@@ -57,9 +57,16 @@ public class ConsultaController {
             Model model) {
         try {
             String idPaciente;
+            String nomePaciente = null;
             Object tipoUsuario = session.getAttribute("tipoUsuario");
             if ("recepcionista".equals(tipoUsuario)) {
                 idPaciente = pacienteId;
+                if (pacienteRepository != null && pacienteId != null) {
+                    var pacienteOpt = pacienteRepository.findById(pacienteId);
+                    if (pacienteOpt.isPresent()) {
+                        nomePaciente = pacienteOpt.get().getNome();
+                    }
+                }
             } else {
                 Paciente paciente = (Paciente) session.getAttribute("usuarioLogado");
                 if (paciente == null) {
@@ -67,6 +74,7 @@ public class ConsultaController {
                     return "Views/AgendamentoConsulta-Paciente/index";
                 }
                 idPaciente = paciente.getId();
+                nomePaciente = paciente.getNome();
             }
 
             // Monta data e hora
@@ -81,7 +89,8 @@ public class ConsultaController {
                 preConsulta,
                 "Agendada",
                 null, // idMedico (pode ser null por enquanto)
-                idPaciente
+                idPaciente,
+                nomePaciente // agora salva o nome do paciente
             );
 
             if (consultaRepository != null) {

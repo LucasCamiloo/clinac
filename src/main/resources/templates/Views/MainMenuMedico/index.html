@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel do Paciente</title>
+  <title>Painel do Médico</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: url('/Includes/background.png') no-repeat center center fixed;
+      background: url('background.png') no-repeat center center fixed;
       background-size: cover;
       min-height: 100vh;
       display: flex;
@@ -44,7 +44,7 @@
       border-radius: 10px;
       padding: 20px;
       width: 180px;
-      height: 180px; /* Tamanho fixo para o botão */
+      height: 180px;
       text-align: center;
       cursor: pointer;
       display: flex;
@@ -52,12 +52,12 @@
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
-      overflow: hidden; /* Garante que nada saia do quadrado */
+      overflow: hidden;
     }
     .buttons img {
-      width: 60px; /* Ajuste o tamanho da imagem */
+      width: 60px;
       height: 60px;
-      object-fit: contain; /* Garante que a imagem não ultrapasse o quadrado */
+      object-fit: contain;
       margin-bottom: 10px;
       display: block;
       margin-left: auto;
@@ -126,12 +126,12 @@
       cursor: pointer;
       font-family: 'Poppins', sans-serif;
     }
-    .btn-realizada {
-      background-color: #4CAF50;
+    .btn-prescrever {
+      background-color: #003699;
       color: white;
     }
-    .btn-cancelar {
-      background-color: #f44336;
+    .btn-realizada {
+      background-color: #5DBE80;
       color: white;
     }
     footer {
@@ -169,31 +169,24 @@
   </style>
 </head>
 <body>
-  <div th:if="${session.usuarioLogado == null}">
-    <script th:inline="javascript">
-      /*<![CDATA[*/
-      window.location.replace('/login');
-      /*]]>*/
-    </script>
-  </div>
   <header style="display: flex; align-items: center; justify-content: space-between; background-color: #003399; height: 60px;">
-    <span style="color: white; font-size: 1.3rem; font-weight: bold; margin-left: 30px;">Painel do Paciente</span>
+    <span style="color: white; font-size: 1.3rem; font-weight: bold; margin-left: 30px;">Painel do Médico</span>
     <a href="/logout" style="margin-right: 30px; background: #d0342c; color: white; padding: 10px 22px; border-radius: 8px; text-decoration: none; font-weight: bold; font-family: 'Poppins', sans-serif;">Logout</a>
   </header>
 
   <section class="top-section">
-    <h1>Painel do paciente</h1>
+    <h1>Painel do Médico</h1>
     <div class="buttons">
-      <div onclick="window.location.href='/Views/AgendamentoConsulta-Paciente/index.html'">
-        <img src="/Includes/agenda.png" alt="Agendar consulta">
-        Agendar consulta
-      </div>
-      <div onclick="window.location.href='/paciente/prescricoes'">
-        <img src="/Includes/consultar.png" alt="Consultar prescrições">
-        Consultar prescrições
+      <div onclick="window.location.href='/consultar-pacientes'">
+        <img src="/Includes/pacientes.png" alt="Consultar Pacientes">
+        Consultar Pacientes
       </div>
       <div>
-        <img src="/Includes/meu%20perfil.png" alt="Meu perfil">
+        <img src="/Includes/consultas.png" alt="Relatório de Consultas">
+        Relatório de Consultas
+      </div>
+      <div>
+        <img src="/Includes/doutor.png" alt="Meu perfil">
         Meu perfil
       </div>
     </div>
@@ -202,8 +195,11 @@
   <section class="appointments">
     <h2>Agendamentos</h2>
     <div class="action-buttons">
-      <button class="btn btn-realizada">Realizada</button>
-      <button class="btn btn-cancelar">Cancelar</button>
+      <form id="formPrescrever" th:action="@{/prescrever}" method="get" style="display:inline;">
+        <input type="hidden" name="consultaId" id="consultaIdPrescrever" />
+        <button type="button" class="btn btn-prescrever" onclick="prescreverSelecionado()">Prescrever</button>
+      </form>
+      <button class="btn btn-realizada" onclick="marcarRealizada()">Realizada</button>
     </div>
     <table>
       <thead>
@@ -213,35 +209,47 @@
           <th>Serviço</th>
           <th>Data do agendamento</th>
           <th>Horário</th>
-          <th>Médico</th>
+          <th>Paciente</th>
           <th>Status</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Mostra as consultas do paciente -->
         <tr th:each="consulta : ${consultas}">
-          <td><input type="radio" name="select"></td>
+          <td><input type="radio" name="select" th:value="${consulta.id}"></td>
           <td th:text="${consulta.id}">10</td>
           <td th:text="${consulta.tipoDeServico}">Cardiologista</td>
           <td th:text="${#dates.format(consulta.dataConsulta, 'dd/MM/yyyy')}">27/05/2025</td>
           <td th:text="${#dates.format(consulta.dataConsulta, 'HH:mm')}">10:30</td>
-          <td th:text="${consulta.profissional}">Marcos da Silva</td>
+          <td th:text="${consulta.nomePaciente != null ? consulta.nomePaciente : consulta.idPaciente}">Paciente</td>
           <td>
             <span th:if="${consulta.status == 'Realizada'}" class="status-realizada" th:text="${consulta.status}">Realizada</span>
             <span th:if="${consulta.status != 'Realizada'}" class="status-cancelar" th:text="${consulta.status}">Agendada</span>
           </td>
         </tr>
-        <!-- Caso não tenha consultas, mostra linhas vazias -->
         <tr th:if="${consultas == null or #lists.isEmpty(consultas)}">
-          <td><input type="radio" name="select"></td>
-          <td colspan="6">&nbsp;</td>
-        </tr>
-        <tr th:if="${consultas == null or #lists.isEmpty(consultas)}">
-          <td><input type="radio" name="select"></td>
-          <td colspan="6">&nbsp;</td>
+          <td colspan="7" style="text-align:center;">Nenhum agendamento encontrado.</td>
         </tr>
       </tbody>
     </table>
+    <script>
+      function prescreverSelecionado() {
+        const selecionado = document.querySelector('input[name="select"]:checked');
+        if (selecionado) {
+          document.getElementById('consultaIdPrescrever').value = selecionado.value;
+          document.getElementById('formPrescrever').submit();
+        } else {
+          alert('Selecione um agendamento para prescrever.');
+        }
+      }
+      function marcarRealizada() {
+        const selecionado = document.querySelector('input[name="select"]:checked');
+        if (selecionado) {
+          // Implemente aqui se desejar marcar como realizada direto pelo painel do médico
+        } else {
+          alert('Selecione um agendamento para marcar como realizada.');
+        }
+      }
+    </script>
   </section>
 
   <footer>

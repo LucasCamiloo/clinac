@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.senac.projetointegrador.entities.Paciente;
 import com.senac.projetointegrador.repositorys.PacienteRepository;
+import com.senac.projetointegrador.repositorys.PrescricaoRepository;
 import com.senac.projetointegrador.service.AuthService;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,6 +22,9 @@ public class PacienteController {
 
     @Autowired(required = false)
     private PacienteRepository pacienteRepository;
+    
+    @Autowired(required = false)
+    private PrescricaoRepository prescricaoRepository;
     
     @Autowired
     private AuthService authService;
@@ -85,5 +89,18 @@ public class PacienteController {
             model.addAttribute("erro", "Erro ao cadastrar: " + e.getMessage());
             return "Views/Cadastro_Paciente";
         }
+    }
+
+    @GetMapping("/paciente/prescricoes")
+    public String verPrescricoes(HttpSession session, Model model) {
+        Object usuario = session.getAttribute("usuarioLogado");
+        if (usuario == null || !(usuario instanceof Paciente)) {
+            return "redirect:/login";
+        }
+        Paciente paciente = (Paciente) usuario;
+        if (prescricaoRepository != null) {
+            model.addAttribute("prescricoes", prescricaoRepository.findByPacienteId(paciente.getId()));
+        }
+        return "Views/Prescrever/relatorioPaciente";
     }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ConsultaRepository extends MongoRepository<Consulta, String> {
     List<Consulta> findByIdPaciente(String idPaciente);
+    List<Consulta> findByProfissional(String profissional);
 }

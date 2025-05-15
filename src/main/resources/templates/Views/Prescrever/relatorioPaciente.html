@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Minhas Prescrições</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('/Includes/background.png') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003399;
+      height: 60px;
+    }
+    .container {
+      background-color: rgba(240, 248, 255, 0.95);
+      max-width: 1000px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 50px 40px;
+      border: 2px solid #003399;
+      border-radius: 15px;
+    }
+    h1 {
+      text-align: center;
+      color: #1a355e;
+      margin-bottom: 40px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #d3dcec;
+    }
+    th {
+      background-color: #c0e5d5;
+    }
+    tr:nth-child(even) {
+      background-color: #f5f9ff;
+    }
+    tr:nth-child(odd) {
+      background-color: #e6ebf5;
+    }
+    footer {
+      background-color: #003399;
+      color: white;
+      text-align: center;
+      font-size: 12px;
+      padding: 20px 10px;
+      margin-top: auto;
+    }
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead {
+        display: none;
+      }
+      tr {
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: white;
+      }
+      td {
+        text-align: left;
+        padding: 8px;
+        border: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header></header>
+  <div class="container">
+    <h1>Minhas Prescrições</h1>
+    <a th:href="@{/Views/MainMenuPaciente/index}" style="display:inline-block;margin-bottom:20px;background:#003399;color:#fff;padding:10px 25px;border-radius:8px;text-decoration:none;font-weight:bold;">Voltar</a>
+    <table>
+      <thead>
+        <tr>
+          <th>Remédio</th>
+          <th>Dose de Uso</th>
+          <th>Alternativo</th>
+          <th>Data Início</th>
+          <th>Data Fim</th>
+          <th>Observação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="prescricao : ${prescricoes}">
+          <td th:text="${prescricao.remedio}">Remédio</td>
+          <td th:text="${prescricao.doseDeUso}">Dose</td>
+          <td th:text="${prescricao.remedioAlternativo}">Alternativo</td>
+          <td th:text="${#dates.format(prescricao.dataInicio, 'dd/MM/yyyy')}">Início</td>
+          <td th:text="${#dates.format(prescricao.dataFim, 'dd/MM/yyyy')}">Fim</td>
+          <td th:text="${prescricao.observacao}">Obs</td>
+        </tr>
+        <tr th:if="${prescricoes == null or #lists.isEmpty(prescricoes)}">
+          <td colspan="6" style="text-align:center;">Nenhuma prescrição encontrada.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <footer>
+    CLINAC+ | 2025<br>
+    Os serviços anunciados neste site são apenas um portfólio fictício.<br>
+    O Clinac+ é apenas um projeto universitário desenvolvido por alunos como forma de avaliação! As fotos contidas nesta página são meramente ilustrativas.
+  </footer>
+</body>
+</html>
