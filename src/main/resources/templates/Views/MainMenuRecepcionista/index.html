@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel do Recepcionista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #003399;
+      height: 60px;
+    }
+    .top-section {
+      background-color: rgba(217, 227, 241, 0.9);
+      text-align: center;
+      padding: 30px 10px;
+    }
+    .top-section h1 {
+      color: #1a355e;
+      margin-bottom: 30px;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .buttons div {
+      background-color: #f5f9ff;
+      border: 2px solid #5c7dc2;
+      border-radius: 10px;
+      padding: 20px;
+      width: 180px;
+      height: 180px; /* Tamanho fixo para o botão */
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      overflow: hidden; /* Garante que nada saia do quadrado */
+    }
+    .buttons img {
+      width: 60px; /* Ajuste o tamanho da imagem */
+      height: 60px;
+      object-fit: contain; /* Garante que a imagem não ultrapasse o quadrado */
+      margin-bottom: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .buttons div:hover {
+      background-color: #e6efff;
+    }
+    .appointments {
+      background-color: rgba(255, 255, 255, 0.95);
+      margin: 30px auto;
+      width: 90%;
+      max-width: 900px;
+      border: 3px solid #a1b3db;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .appointments h2 {
+      background-color: #c8d6f1;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      color: #1a355e;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #d3dcec;
+    }
+    th {
+      background-color: #c0e5d5;
+    }
+    .status-realizada {
+      background-color: #d2f3dc;
+      color: #2e7d32;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .status-cancelar {
+      background-color: #f44336;
+      color: white;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+    .btn-realizada {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .btn-cancelar {
+      background-color: #f44336;
+      color: white;
+    }
+    footer {
+      background-color: #003399;
+      color: white;
+      text-align: center;
+      font-size: 12px;
+      padding: 20px 10px;
+      margin-top: auto;
+    }
+    @media (max-width: 600px) {
+      .buttons div {
+        width: 100%;
+        max-width: 280px;
+      }
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead {
+        display: none;
+      }
+      tr {
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: white;
+      }
+      td {
+        text-align: left;
+        padding: 8px;
+        border: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div th:if="${session.usuarioLogado == null}">
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      /*window.location.replace('/login');
+      /*]]>*/
+    </script>
+  </div>
+  <header style="display: flex; align-items: center; justify-content: space-between; background-color: #003399; height: 60px;">
+    <span style="color: white; font-size: 1.3rem; font-weight: bold; margin-left: 30px;">Painel do Recepcionista</span>
+    <a href="/logout" style="margin-right: 30px; background: #d0342c; color: white; padding: 10px 22px; border-radius: 8px; text-decoration: none; font-weight: bold; font-family: 'Poppins', sans-serif;">Logout</a>
+  </header>
+
+  <section class="top-section">
+    <h1>Painel do Recepcionista</h1>
+    <div class="buttons">
+      <div onclick="window.location.href='/consultar-pacientes'">
+        <img src="Includes/consultar.png" alt="Consultar pacientes">
+        Consultar Paciente
+      </div>
+      <div onclick="window.location.href='/consultar-medicos'">
+        <img src="Includes/consultar.png" alt="Consultar médicos">
+        Consultar Médicos
+      </div>
+      <div onclick="window.location.href='/Views/AgendamentoConsulta-Paciente/index.html'">
+        <img src="Includes/agenda.png" alt="Marcar consulta">
+        Marcar Consulta
+      </div>
+      <div>
+        <img src="Includes/meu%20perfil.png" alt="Meu perfil">
+        Meu Perfil
+      </div>
+    </div>
+  </section>
+
+  <section class="appointments">
+    <h2>Agendamentos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Serviço</th>
+          <th>Data do agendamento</th>
+          <th>Horário</th>
+          <th>Médico</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="consulta : ${consultas}">
+          <td th:text="${consulta.id}">10</td>
+          <td th:text="${consulta.tipoDeServico}">Cardiologista</td>
+          <td th:text="${#dates.format(consulta.dataConsulta, 'dd/MM/yyyy')}">27/05/2025</td>
+          <td th:text="${#dates.format(consulta.dataConsulta, 'HH:mm')}">10:30</td>
+          <td th:text="${consulta.profissional}">Marcos da Silva</td>
+          <td>
+            <span th:if="${consulta.status == 'Realizada'}" class="status-realizada" th:text="${consulta.status}">Realizada</span>
+            <span th:if="${consulta.status != 'Realizada'}" class="status-cancelar" th:text="${consulta.status}">Agendada</span>
+          </td>
+          <td>
+            <form th:action="@{/consultas/realizar}" method="post" style="display:inline;">
+              <input type="hidden" name="id" th:value="${consulta.id}" />
+              <button type="submit" class="btn btn-realizada" th:disabled="${consulta.status == 'Realizada'}">Marcar como Realizada</button>
+            </form>
+            <form th:action="@{/consultas/excluir}" method="post" style="display:inline;">
+              <input type="hidden" name="id" th:value="${consulta.id}" />
+              <button type="submit" class="btn btn-cancelar">Excluir</button>
+            </form>
+          </td>
+        </tr>
+        <tr th:if="${consultas == null or #lists.isEmpty(consultas)}">
+          <td colspan="7" style="text-align:center;">Nenhum agendamento encontrado.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    CLINAC+ | 2025<br>
+    Os serviços anunciados neste site são apenas um portfólio fictício.<br>
+    O Clinac+ é apenas um projeto universitário desenvolvido por alunos como forma de avaliação! As fotos contidas nesta página são meramente ilustrativas.
+  </footer>
+</body>
+</html>

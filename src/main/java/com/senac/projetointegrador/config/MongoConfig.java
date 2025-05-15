@@ -24,7 +24,7 @@ public class MongoConfig {
     @Bean
     public MongoClient mongoClient() {
         try {
-            ConnectionString connectionString = new ConnectionString("COLOQUE AQUI A SUA STRING DE CONEXÃO DO MONGODB");
+            ConnectionString connectionString = new ConnectionString("mongodb+srv://lucascamilo430:qf58LzXnV94H5OIr@cluster0.9olvadd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
             MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                     .applyConnectionString(connectionString)
                     .applyToSocketSettings(builder -> builder

@@ -1,0 +1,80 @@
+<!-- Crie este arquivo para resolver o erro de template ao editar médico -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Médico</title>
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #e6ebf5; }
+    .container { max-width: 500px; margin: 40px auto; background: #fff; border-radius: 15px; border: 2px solid #003699; padding: 30px; }
+    h2 { color: #0B6599; text-align: center; margin-bottom: 20px; }
+    form { display: flex; flex-direction: column; gap: 15px; }
+    label { font-weight: 600; }
+    input, select {
+      width: 100%; height: 40px; border-radius: 8px; border: 1px solid #003699; padding-left: 10px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .botoes { display: flex; justify-content: flex-end; gap: 15px; margin-top: 10px; }
+    button { font-size: 16px; border-radius: 8px; border: none; padding: 10px 25px; }
+    .cancelar { background: #C0392B; color: white; }
+    .salvar { background: #003699; color: white; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Editar Médico</h2>
+    <form th:action="@{/medicos/editar}" method="post">
+      <input type="hidden" name="id" th:value="${medico.id}" />
+      <label>Nome completo
+        <input type="text" name="nome" th:value="${medico.nome}" required>
+      </label>
+      <label>CRM
+        <input type="number" name="crm" th:value="${medico.crm}" required>
+      </label>
+      <label>Telefone
+        <input type="tel" name="telefone" th:value="${medico.telefone}" required>
+      </label>
+      <label>E-mail
+        <input type="email" name="email" th:value="${medico.email}" required>
+      </label>
+      <label>Sexo
+        <select name="sexo" required>
+          <option th:selected="${medico.sexo == 'Masculino'}" value="Masculino">Masculino</option>
+          <option th:selected="${medico.sexo == 'Feminino'}" value="Feminino">Feminino</option>
+          <option th:selected="${medico.sexo == 'Outro'}" value="Outro">Outro</option>
+        </select>
+      </label>
+      <label>CPF
+        <input type="text" name="cpf" th:value="${medico.cpf}" required>
+      </label>
+      <label>Cidade
+        <input type="text" name="cidade" th:value="${medico.cidade}" required>
+      </label>
+      <label>Estado (UF)
+        <input type="text" name="estado" maxlength="2" th:value="${medico.estado}" required placeholder="Ex: SP">
+      </label>
+      <label>Senha
+        <input type="password" name="senha" th:value="${medico.senha}" required>
+      </label>
+      <label>Especialidade
+        <select name="especialidade" required>
+          <option th:selected="${medico.especialidade == 'Cardiologista'}" value="Cardiologista">Cardiologista</option>
+          <option th:selected="${medico.especialidade == 'Clínico Geral'}" value="Clínico Geral">Clínico Geral</option>
+          <option th:selected="${medico.especialidade == 'Dermatologista'}" value="Dermatologista">Dermatologista</option>
+          <option th:selected="${medico.especialidade == 'Ortopedista'}" value="Ortopedista">Ortopedista</option>
+          <option th:selected="${medico.especialidade == 'Pediatra'}" value="Pediatra">Pediatra</option>
+          <option th:selected="${medico.especialidade == 'Ginecologista'}" value="Ginecologista">Ginecologista</option>
+          <option th:selected="${medico.especialidade == 'Oftalmologista'}" value="Oftalmologista">Oftalmologista</option>
+          <option th:selected="${medico.especialidade == 'Psiquiatra'}" value="Psiquiatra">Psiquiatra</option>
+          <option th:selected="${medico.especialidade == 'Neurologista'}" value="Neurologista">Neurologista</option>
+          <option th:selected="${medico.especialidade == 'Endocrinologista'}" value="Endocrinologista">Endocrinologista</option>
+        </select>
+      </label>
+      <div class="botoes">
+        <a th:href="@{/consultar-medicos}" class="cancelar" style="text-decoration:none;display:inline-block;text-align:center;">Cancelar</a>
+        <button type="submit" class="salvar">Salvar</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

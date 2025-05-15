@@ -16,6 +16,7 @@ public abstract class Pessoa {
     private String cidade;
     private String estado;
     private String senha;
+    private String tipo; // "paciente", "medico" ou "recepcionista"
 
     public Pessoa(String nome, String cpf, String email, String telefone, String sexo, String cidade, String estado,
             String senha) {
@@ -27,6 +28,7 @@ public abstract class Pessoa {
         this.cidade = cidade;
         this.estado = estado;
         this.senha = senha;
+        this.tipo = "paciente"; // padrão para cadastro de paciente
     }
 
     public String getId() {
@@ -95,6 +97,14 @@ public abstract class Pessoa {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     @Override

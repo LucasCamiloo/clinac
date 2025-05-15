@@ -14,6 +14,8 @@ import com.senac.projetointegrador.entities.Paciente;
 import com.senac.projetointegrador.repositorys.PacienteRepository;
 import com.senac.projetointegrador.service.AuthService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class PacienteController {
 
@@ -24,7 +26,10 @@ public class PacienteController {
     private AuthService authService;
 
     @GetMapping("/cadastro-paciente")
-    public String formularioCadastro() {
+    public String formularioCadastro(HttpSession session) {
+        if (session.getAttribute("usuarioLogado") != null) {
+            return "redirect:/";
+        }
         return "Views/Cadastro_Paciente";
     }
     
@@ -39,8 +44,13 @@ public class PacienteController {
             @RequestParam String estado,
             @RequestParam String senha,
             @RequestParam String data,
+            HttpSession session,
             Model model) {
         
+        if (session.getAttribute("usuarioLogado") != null) {
+            return "redirect:/";
+        }
+
         try {
             // Parse the date
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

@@ -8,6 +8,7 @@ public class Recepcionista extends Pessoa {
 	public Recepcionista(String nome, String cpf, String email, String telefone, String sexo, String cidade,
 						 String estado, String senha) {
 		super(nome, cpf, email, telefone, sexo, cidade, estado, senha);
+		setTipo("recepcionista");
 	}
 	
 }

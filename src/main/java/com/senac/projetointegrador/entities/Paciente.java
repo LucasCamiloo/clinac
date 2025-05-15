@@ -15,6 +15,7 @@ public class Paciente extends Pessoa {
             String senha, Date dataDeNascimento) {
         super(nome, cpf, email, telefone, sexo, cidade, estado, senha);
         this.dataDeNascimento = dataDeNascimento;
+        setTipo("paciente");
     }
 
     public Date getDataDeNascimento() {

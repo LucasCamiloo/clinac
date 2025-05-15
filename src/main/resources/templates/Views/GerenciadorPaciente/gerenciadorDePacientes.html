@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerenciador de pacientes</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap");
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #e6ebf5; min-height: 100vh; display: flex; flex-direction: column; }
+    header { height: 85px; width: 100%; background-color: #003699; box-shadow: inset 0px -7px #1396e0; }
+    main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
+    .container { width: 90%; max-width: 1000px; background-color: #d7ebf3; border: 2px solid #003699; border-radius: 15px; padding: 20px; }
+    h1 { text-align: center; color: #0b6599; margin-bottom: 20px; font-weight: 700; }
+    .botoes { display: flex; justify-content: flex-end; gap: 15px; margin-bottom: 15px; }
+    .botoes button { padding: 10px 20px; border: 1px solid black; border-radius: 8px; color: white; font-size: 16px; cursor: pointer; }
+    .botoes .cadastrar { background-color: #9DD8C5; }
+    .botoes .editar { background-color: #003699; }
+    .botoes .excluir { background-color: #C0392B; }
+    .tabela-container { max-height: 300px; overflow-y: auto; border: 2px solid #003699; border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; min-width: 700px; }
+    thead th { position: sticky; top: 0; background-color: #b6e3db; padding: 10px; text-align: left; border-bottom: 1px solid #999; z-index: 1; }
+    tbody td { padding: 10px; background-color: #f0f4fa; border-bottom: 1px solid #ccc; }
+    tbody tr:last-child td { border-bottom: none; }
+    td input[type="radio"] { transform: scale(1.2); }
+    footer { height: 115px; background-color: #003699; color: white; font-size: 14px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; }
+    footer strong { font-weight: bold; }
+    @media (max-width: 768px) {
+      .botoes { flex-direction: column; align-items: flex-end; }
+      table { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header></header>
+  <main>
+    <div class="container">
+      <h1>Gerenciador de pacientes</h1>
+      <div class="botoes">
+        <button class="cadastrar" onclick="abrirModalCadastro()">Cadastrar</button>
+        <button class="editar" onclick="editarPaciente()">Editar</button>
+        <button class="excluir" onclick="excluirPaciente()">Excluir</button>
+      </div>
+      <div class="tabela-container">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>ID</th>
+              <th>Nome completo</th>
+              <th>Estado</th>
+              <th>Cidade</th>
+              <th>Telefone</th>
+              <th>E-mail</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="paciente : ${pacientes}">
+              <td><input type="radio" name="selecionar-paciente" th:value="${paciente.id}" /></td>
+              <td th:text="${paciente.id}">1</td>
+              <td th:text="${paciente.nome}">Nome Paciente</td>
+              <td th:text="${paciente.estado}">SP</td>
+              <td th:text="${paciente.cidade}">São Paulo</td>
+              <td th:text="${paciente.telefone}">(11)99999-9999</td>
+              <td th:text="${paciente.email}">paciente@clinac.com</td>
+            </tr>
+            <tr th:if="${pacientes == null or #lists.isEmpty(pacientes)}">
+              <td colspan="7" style="text-align:center;">Nenhum paciente cadastrado.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Modal de Cadastro de Paciente -->
+    <div id="modalCadastroPaciente" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center;">
+      <div style="background:#E6EBF5; border-radius:20px; border:2px solid #003699; width:500px; max-width:95vw; padding:30px 30px 20px 30px; margin:auto; position:relative;">
+        <h2 style="color:#0B6599; text-align:center; margin-bottom:20px;">Cadastrar Paciente</h2>
+        <form th:action="@{/pacientes/cadastrar}" method="post" style="display:flex; flex-direction:column; gap:15px;">
+          <label style="font-weight:600;">Nome completo
+            <input type="text" name="nome" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;padding-left:10px;">
+          </label>
+          <label style="font-weight:600;">Data de Nascimento
+            <input type="date" name="data" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;padding-left:10px;">
+          </label>
+          <label style="font-weight:600;">Telefone
+            <input type="tel" name="telefone" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;padding-left:10px;">
+          </label>
+          <label style="font-weight:600;">E-mail
+            <input type="email" name="email" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;padding-left:10px;">
+          </label>
+          <label style="font-weight:600;">Sexo
+            <select name="sexo" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;">
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+              <option value="Outro">Outro</option>
+            </select>
+          </label>
+          <label style="font-weight:600;">CPF
+            <input type="text" name="cpf" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;padding-left:10px;">
+          </label>
+          <label style="font-weight:600;">Cidade
+            <input type="text" name="cidade" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;padding-left:10px;">
+          </label>
+          <label style="font-weight:600;">Estado (UF)
+            <input type="text" name="estado" maxlength="2" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;padding-left:10px;" placeholder="Ex: SP">
+          </label>
+          <label style="font-weight:600;">Senha
+            <input type="password" name="senha" required style="width:100%;height:40px;border-radius:8px;border:1px solid #003699;padding-left:10px;">
+          </label>
+          <div style="display:flex; justify-content:flex-end; gap:15px; margin-top:10px;">
+            <button type="button" onclick="fecharModalCadastroPaciente()" style="background:#C0392B; color:white; border:none; border-radius:8px; padding:10px 25px; font-size:16px;">Cancelar</button>
+            <button type="submit" style="background:#003699; color:white; border:none; border-radius:8px; padding:10px 25px; font-size:16px;">Cadastrar</button>
+          </div>
+        </form>
+        <button onclick="fecharModalCadastroPaciente()" style="position:absolute;top:10px;right:15px;background:none;border:none;font-size:22px;color:#003699;cursor:pointer;">&times;</button>
+      </div>
+    </div>
+    <script>
+      function abrirModalCadastro() {
+        document.getElementById('modalCadastroPaciente').style.display = 'flex';
+      }
+      function fecharModalCadastroPaciente() {
+        document.getElementById('modalCadastroPaciente').style.display = 'none';
+      }
+      function excluirPaciente() {
+        const selecionado = document.querySelector('input[name=\"selecionar-paciente\"]:checked');
+        if (selecionado) {
+          document.getElementById('id-excluir').value = selecionado.value;
+          document.getElementById('form-excluir').submit();
+        } else {
+          alert('Selecione um paciente para excluir.');
+        }
+      }
+      function editarPaciente() {
+        const selecionado = document.querySelector('input[name=\"selecionar-paciente\"]:checked');
+        if (selecionado) {
+          document.getElementById('id-editar').value = selecionado.value;
+          document.getElementById('form-editar').submit();
+        } else {
+          alert('Selecione um paciente para editar.');
+        }
+      }
+    </script>
+    <form id="form-excluir" th:action="@{/pacientes/excluir}" method="post" style="display:none;">
+      <input type="hidden" name="id" id="id-excluir" />
+    </form>
+    <form id="form-editar" th:action="@{/pacientes/editar}" method="get" style="display:none;">
+      <input type="hidden" name="id" id="id-editar" />
+    </form>
+  </main>
+  <footer>
+    <p>
+      <strong>CLINAC+ | 2025</strong><br />
+      Os serviços anunciados neste site são apenas um portfólio fictício.<br />
+      O Clinac+ é apenas um projeto universitário desenvolvido por alunos como forma de avaliação! As fotos contidas nesta página são meramente ilustrativas.
+    </p>
+  </footer>
+</body>
+</html>

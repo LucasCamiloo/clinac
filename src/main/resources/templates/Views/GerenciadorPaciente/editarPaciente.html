@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Paciente</title>
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #e6ebf5; }
+    .container { max-width: 500px; margin: 40px auto; background: #fff; border-radius: 15px; border: 2px solid #003699; padding: 30px; }
+    h2 { color: #0B6599; text-align: center; margin-bottom: 20px; }
+    form { display: flex; flex-direction: column; gap: 15px; }
+    label { font-weight: 600; }
+    input, select {
+      width: 100%; height: 40px; border-radius: 8px; border: 1px solid #003699; padding-left: 10px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .botoes { display: flex; justify-content: flex-end; gap: 15px; margin-top: 10px; }
+    button { font-size: 16px; border-radius: 8px; border: none; padding: 10px 25px; }
+    .cancelar { background: #C0392B; color: white; }
+    .salvar { background: #003699; color: white; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Editar Paciente</h2>
+    <form th:action="@{/pacientes/editar}" method="post">
+      <input type="hidden" name="id" th:value="${paciente.id}" />
+      <label>Nome completo
+        <input type="text" name="nome" th:value="${paciente.nome}" required>
+      </label>
+      <label>Data de Nascimento
+        <input type="date" name="data" th:value="${#dates.format(paciente.dataDeNascimento, 'yyyy-MM-dd')}" required>
+      </label>
+      <label>Telefone
+        <input type="tel" name="telefone" th:value="${paciente.telefone}" required>
+      </label>
+      <label>E-mail
+        <input type="email" name="email" th:value="${paciente.email}" required>
+      </label>
+      <label>Sexo
+        <select name="sexo" required>
+          <option th:selected="${paciente.sexo == 'Masculino'}" value="Masculino">Masculino</option>
+          <option th:selected="${paciente.sexo == 'Feminino'}" value="Feminino">Feminino</option>
+          <option th:selected="${paciente.sexo == 'Outro'}" value="Outro">Outro</option>
+        </select>
+      </label>
+      <label>CPF
+        <input type="text" name="cpf" th:value="${paciente.cpf}" required>
+      </label>
+      <label>Cidade
+        <input type="text" name="cidade" th:value="${paciente.cidade}" required>
+      </label>
+      <label>Estado (UF)
+        <input type="text" name="estado" maxlength="2" th:value="${paciente.estado}" required placeholder="Ex: SP">
+      </label>
+      <label>Senha
+        <input type="password" name="senha" th:value="${paciente.senha}" required>
+      </label>
+      <div class="botoes">
+        <a th:href="@{/consultar-pacientes}" class="cancelar" style="text-decoration:none;display:inline-block;text-align:center;">Cancelar</a>
+        <button type="submit" class="salvar">Salvar</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
