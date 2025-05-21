@@ -91,6 +91,34 @@
       margin-top: auto;
     }
     @media (max-width: 600px) {
+      .container {
+        width: 95%;
+        padding: 30px 15px;
+      }
+      
+      h1 {
+        font-size: 24px;
+        margin-bottom: 25px;
+      }
+      
+      form {
+        gap: 10px;
+      }
+      
+      input, select, textarea {
+        font-size: 16px; /* Melhora foco em dispositivos móveis */
+      }
+      
+      [style*="justify-content:flex-end"] {
+        justify-content: space-between !important;
+        margin-top: 15px;
+      }
+      
+      button[type="button"], button[type="submit"] {
+        padding: 10px 15px;
+        font-size: 15px;
+        flex: 1;
+      }
       .form-group div {
         flex: 1 1 100%;
       }

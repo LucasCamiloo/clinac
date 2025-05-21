@@ -181,7 +181,7 @@
         <img src="/Includes/pacientes.png" alt="Consultar Pacientes">
         Consultar Pacientes
       </div>
-      <div>
+      <div onclick="window.location.href='/relatorio-consultas'">
         <img src="/Includes/consultas.png" alt="Relatório de Consultas">
         Relatório de Consultas
       </div>
@@ -211,6 +211,7 @@
           <th>Horário</th>
           <th>Paciente</th>
           <th>Status</th>
+          <th>Relatório</th>
         </tr>
       </thead>
       <tbody>
@@ -225,9 +226,12 @@
             <span th:if="${consulta.status == 'Realizada'}" class="status-realizada" th:text="${consulta.status}">Realizada</span>
             <span th:if="${consulta.status != 'Realizada'}" class="status-cancelar" th:text="${consulta.status}">Agendada</span>
           </td>
+          <td>
+            <a th:href="@{/relatorio-medico(consultaId=${consulta.id})}" target="_blank" style="background:#003699;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-size:14px;">Ver Relatório</a>
+          </td>
         </tr>
         <tr th:if="${consultas == null or #lists.isEmpty(consultas)}">
-          <td colspan="7" style="text-align:center;">Nenhum agendamento encontrado.</td>
+          <td colspan="8" style="text-align:center;">Nenhum agendamento encontrado.</td>
         </tr>
       </tbody>
     </table>

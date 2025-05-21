@@ -385,3 +385,210 @@ footer{
         padding: 35px 50px 35px 50px;
     }
 }
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 0;
+    }
+    
+    header p {
+        margin: 5px 0;
+    }
+    
+    #banner-botton {
+        flex-direction: column;
+        height: auto;
+        margin-bottom: 30px;
+    }
+    
+    #banner-botton .imagem {
+        width: 100%;
+        height: 200px;
+        min-height: 200px;
+    }
+    
+    #programas {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 20px 10px;
+    }
+    
+    #programas .quadrado {
+        width: 95%;
+        margin-bottom: 15px;
+    }
+    
+    #banner_convenio {
+        height: auto;
+    }
+    
+    #banner_aceitos {
+        flex-direction: column;
+        height: auto;
+        padding: 20px 0;
+    }
+    
+    #aceito_texto, #aceito_imagem {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    #quem_somos {
+        height: auto;
+        padding: 20px 0;
+    }
+    
+    #area {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+    
+    .quadrado_somos {
+        width: 95%;
+        margin-bottom: 15px;
+    }
+    
+    /* Ajustes específicos para elementos da página inicial */
+    .botao-login {
+        margin: 20px auto;
+    }
+}
+
+/* Estilo específico para telas muito pequenas (celulares) */
+@media (max-width: 480px) {
+    #banner-botton .imagem {
+        height: 150px;
+    }
+    
+    .conveniados {
+        margin: 5px;
+    }
+}
+
+/* Responsividade para a página inicial */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+    
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    header p {
+        margin: 5px 0;
+    }
+    
+    #banner-botton {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    #banner-botton div:first-child {
+        width: 100%;
+        padding: 20px 10px;
+        text-align: center;
+    }
+    
+    .botao-login {
+        margin: 20px auto;
+        display: inline-block;
+    }
+    
+    #banner-botton .imagem {
+        width: 100%;
+        height: 200px;
+    }
+    
+    #programas {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 20px 10px;
+    }
+    
+    #programas .quadrado {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+    
+    #banner_convenio {
+        height: auto;
+    }
+    
+    #banner_aceitos {
+        flex-direction: column;
+        height: auto;
+        padding: 20px 0;
+    }
+    
+    #aceito_texto, #aceito_imagem {
+        width: 100%;
+        padding: 15px;
+        text-align: center;
+    }
+    
+    #aceito_imagem > div {
+        flex-direction: column;
+    }
+    
+    .conveniados {
+        margin: 10px 0;
+    }
+    
+    #quem_somos {
+        height: auto;
+        padding: 30px 10px;
+    }
+    
+    #area {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }
+    
+    .quadrado_somos {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1#titulo {
+        font-size: 24px;
+    }
+    
+    #banner-botton .imagem {
+        height: 150px;
+    }
+    
+    .botao-login {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    #programas .quadrado {
+        width: 95%;
+    }
+    
+    .quadrado .imagem img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .quadrado .texto p {
+        font-size: 14px;
+    }
+    
+    .quadrado button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}

@@ -180,6 +180,85 @@
             margin: 10px 0;
             text-align: center;
         }
+
+        /* Responsividade para dispositivos móveis */
+        @media (max-width: 940px) {
+            main {
+                height: auto;
+                padding: 20px 10px;
+            }
+            
+            #formulario {
+                width: 95%;
+                height: auto;
+                padding: 20px;
+                margin: 10px auto;
+            }
+            
+            h1#titulo {
+                font-size: 32px;
+                margin-bottom: 20px;
+                line-height: 1.2;
+            }
+            
+            div#bloco {
+                flex-direction: column;
+                height: auto;
+                gap: 25px;
+                margin-bottom: 10px;
+            }
+            
+            form div#bloco:nth-child(4) {
+                padding-left: 0;
+                justify-content: center;
+                gap: 25px;
+            }
+            
+            input, select, #cidade, #estado {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            div#last {
+                padding-left: 0;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            
+            div#last div {
+                width: 100%;
+            }
+            
+            div#botao {
+                flex-direction: column;
+                align-items: center;
+                padding-right: 0;
+                gap: 15px;
+            }
+            
+            button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        /* Ajustes específicos para telas muito pequenas */
+        @media (max-width: 480px) {
+            h1#titulo {
+                font-size: 28px;
+            }
+            
+            label {
+                font-size: 16px;
+            }
+            
+            input, select {
+                font-size: 16px;
+                height: 50px;
+            }
+        }
     </style>
 </head>
 <body>

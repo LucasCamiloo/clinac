@@ -134,13 +134,65 @@
   }
 
   @media (max-width: 768px) {
+    .container {
+      width: 95%;
+      padding: 15px;
+    }
+    
+    h1 {
+      font-size: 24px;
+    }
+    
     .botoes {
       flex-direction: column;
-      align-items: flex-end;
+      align-items: stretch;
     }
-
-    table {
-      font-size: 14px;
+    
+    .botoes button {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    
+    a[th\\:if] {
+      display: block;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    
+    @media (max-width: 480px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+      
+      tr {
+        margin-bottom: 15px;
+        border: 1px solid #003699;
+      }
+      
+      td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+      }
+      
+      td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        content: attr(data-column);
+      }
     }
   }
 

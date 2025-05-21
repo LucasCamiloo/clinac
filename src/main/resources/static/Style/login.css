@@ -176,3 +176,53 @@ a{
     color: #003699;
 }
 
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        padding: 20px 10px;
+        height: auto;
+    }
+    
+    .quadrado {
+        width: 95% !important;
+        margin: 10px auto;
+        height: auto !important;
+    }
+    
+    #login, #explicacoes {
+        min-height: auto;
+    }
+    
+    input {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    #centro {
+        padding: 20px 10px;
+    }
+    
+    #quadradoEx {
+        height: auto;
+        padding: 20px 10px;
+    }
+    
+    #textos {
+        flex-direction: column;
+    }
+    
+    #textos div {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    footer {
+        height: auto;
+        padding: 15px;
+    }
+    
+    button {
+        width: 100%;
+    }
+}
+
